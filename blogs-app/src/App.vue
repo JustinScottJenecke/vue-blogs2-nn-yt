@@ -1,6 +1,7 @@
 <template>
   <div id="app">
 
+
     <add-blog/>  
 
   </div>
@@ -9,6 +10,8 @@
 
 <script>
   import AddBlog from "./components/AddBlog.vue";
+  import axios from 'axios'
+
 
   export default {
     name: 'App',
@@ -33,6 +36,12 @@
     // methods
     methods : {
 
+    },
+
+    mounted() {
+      axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then(response => console.log(response))
+        // .then(response => console.log(response))
     }
 
   }
