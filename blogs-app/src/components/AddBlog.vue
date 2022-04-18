@@ -24,6 +24,7 @@
             name="blog-content"
             cols="30" 
             rows="3"
+            required
         >
         </textarea>
 
@@ -58,11 +59,13 @@
             </option>
         </select>
 
+        <input type="submit" v-on:click.prevent="saveBlog" class="submit">
+
     </form>
 
     <br>
 
-    <div id="preview">
+    <div id="preview" v-show="submitted">
         <h3>
             Preview Blog
         </h3>
@@ -90,40 +93,70 @@
 
 
 <script>
+    import axios from 'axios';
 
-  export default {
-    name: 'AddBlog',
+    export default {
 
-    // props
-    props : {
+        name: 'AddBlog',
 
-    },
+        // props
+        props : {
 
-    // components
-    components : {
 
-    },
-
-    // data
-    data() {
-      return {
-        
-        newBlog: {
-            title : "",
-            content : "",
-            genres : [],
-            publishDate : ""
         },
-        availDates : ['May', 'June', 'July', 'August', 'September', 'October']
-      }
-    },
 
-    // methods
-    methods : {
+        // components
+        components : {
+
+
+        },
+
+        // data
+        data() {
+            return {
+            
+                newBlog: {
+                    title : "",
+                    content : "",
+                    genres : [],
+                    publishDate : ""
+                },
+
+                availDates : ['May', 'June', 'July', 'August', 'September', 'October'],
+
+                submitted : false
+
+            }
+        },
+
+        // methods
+        methods : {
+
+            // create (CRUD)
+            saveBlog() {
+                axios.post('https://jsonplaceholder.typicode.com/posts', {
+                    method : 'POST',
+                    body : {
+                        title : this.newBlog.title,
+                        body : this.newBlog.content,
+                        userId : 99
+                    }
+                }).then(response => { 
+                    this.submitted = true
+                    console.log(response)
+                })
+            }
+
+        },
+
+        // lifecycle hooks
+        /*mounted() {
+            axios.get('https://jsonplaceholder.typicode.com/posts')
+                .then(response => console.log(response.data))
+                // .then(response => console.log(response))
+        }*/
 
     }
-
-  }
 
 </script>
 
@@ -152,6 +185,11 @@
 
     select {
         width: 20vw;
+    }
+
+    .submit {
+        margin-left: 25vw;
+        margin-right: 25vw;
     }
 
 </style>

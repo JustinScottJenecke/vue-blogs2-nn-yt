@@ -10,9 +10,7 @@
 
 <script>
   import AddBlog from "./components/AddBlog.vue";
-  import axios from 'axios'
-
-
+  
   export default {
     name: 'App',
 
@@ -37,12 +35,6 @@
     methods : {
 
     },
-
-    mounted() {
-      axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then(response => console.log(response))
-        // .then(response => console.log(response))
-    }
 
   }
 
