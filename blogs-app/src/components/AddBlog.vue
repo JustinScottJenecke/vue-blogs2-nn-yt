@@ -5,6 +5,7 @@
         Add a new blog post..
     </h2>
     <form action="" class="form">
+
         <label for="blog-title">Blog Title:</label>
         <input 
             v-model="newBlog.title"
@@ -12,6 +13,7 @@
             name="blog-title" 
             required
         >
+
         <label for="blog-content">Blog Content:</label>        
         <textarea 
             v-model.lazy="newBlog.content"
@@ -20,10 +22,30 @@
             rows="3"
         >
         </textarea>
+
+        <div id="blog-checkboxes">
+            <span class="fieldset">            
+                <label>Backend</label>
+                <input type="checkbox" value="backend" name="" id="" v-model="newBlog.genres">
+            </span>
+
+            <span class="fieldset">
+                <label>Frontend</label>
+                <input type="checkbox" value="frontend" name="" id="" v-model="newBlog.genres">
+            </span>
+
+            <span class="fieldset">
+                <label>Devops</label>
+                <input type="checkbox" value="devops" name="" id="" v-model="newBlog.genres">
+            </span>
+
+            <span class="fieldset">            
+                <label>Full-Stack</label>
+                <input type="checkbox" value="full-stack" name="" id="" v-model="newBlog.genres">            
+            </span>
+        </div>
+
     </form>
-    <div>
-        
-    </div>
 
     <div id="preview">
         <h3>
@@ -35,6 +57,14 @@
         <p>
             Blog Content: {{newBlog.content}}
         </p>
+        <p>
+            Blog Genres:
+        </p>
+        <ul>
+            <li v-for="(genre, i) in newBlog.genres" :key="i">
+                {{genre}}
+            </li>
+        </ul>
     </div>
 
   </div>
@@ -62,7 +92,8 @@
         
         newBlog: {
             title : "",
-            content : ""
+            content : "",
+            genres : []
         }
 
       }
@@ -78,7 +109,26 @@
 </script>
 
 
-<style>
-  
+<style scoped>
+ 
+    #blog-checkboxes {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fieldset *{
+        margin: 0rem 0.25rem;
+    }
+
+    #preview {
+        border: solid 1px;
+        padding: 1rem;
+
+    }
+
+    .form {
+        border: solid 1px;
+        padding: 1rem;
+    }
 
 </style>

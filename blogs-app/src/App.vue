@@ -58,7 +58,7 @@
     .form {
         display: flex;
         flex-direction: column;
-        margin: 0 30vw;
+        padding: 0 30vw;
     }
 
     .form * {
