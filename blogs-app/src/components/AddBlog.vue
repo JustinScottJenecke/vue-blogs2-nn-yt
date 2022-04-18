@@ -1,11 +1,15 @@
 <template>
   <div id="add-blog">
 
+    <!-- Title -->
     <h2 class="add-title">
         Add a new blog post..
     </h2>
+    
+    <!-- Create Blog Form -->
     <form action="" class="form">
 
+        <!-- Input Fields -->
         <label for="blog-title">Blog Title:</label>
         <input 
             v-model="newBlog.title"
@@ -23,6 +27,7 @@
         >
         </textarea>
 
+        <!-- Check Boxes -->
         <div id="blog-checkboxes">
             <span class="fieldset">            
                 <label>Backend</label>
@@ -45,7 +50,17 @@
             </span>
         </div>
 
+        <!-- Date Select -->
+        <h3>Publish Date:</h3>
+        <select v-model="newBlog.publishDate">
+            <option v-for="(date, i) in availDates" :key="i">
+                {{date}}
+            </option>
+        </select>
+
     </form>
+
+    <br>
 
     <div id="preview">
         <h3>
@@ -65,6 +80,9 @@
                 {{genre}}
             </li>
         </ul>
+        <p>
+            Date: {{newBlog.publishDate}}
+        </p>
     </div>
 
   </div>
@@ -93,9 +111,10 @@
         newBlog: {
             title : "",
             content : "",
-            genres : []
-        }
-
+            genres : [],
+            publishDate : ""
+        },
+        availDates : ['May', 'June', 'July', 'August', 'September', 'October']
       }
     },
 
@@ -129,6 +148,10 @@
     .form {
         border: solid 1px;
         padding: 1rem;
+    }
+
+    select {
+        width: 20vw;
     }
 
 </style>
